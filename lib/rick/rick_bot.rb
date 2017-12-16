@@ -1,6 +1,3 @@
-require "awesome_print"
-require "slack-ruby-bot"
-
 module Rick
   class RickBot < SlackRubyBot::Bot
     command "hey" do |client, data, match|
