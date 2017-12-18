@@ -39,7 +39,7 @@ module Rick
       @data.size
     end
 
-    # Pas vraiment le rôle de cette classe...
+    # Not really the purpose of the class...
     def total_off_days(from, to)
       total_off_days = 0
       (from..to).map(&:wday).each do |day|
