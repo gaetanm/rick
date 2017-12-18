@@ -38,21 +38,28 @@ class PullRequestTest < ActiveSupport::TestCase
   # PullRequest#old
   def test_old_sets_data_with_pull_requests_with_no_activity_since_the_given_number_of_day
     VCR.use_cassette "github_projects" do
-      nbr_since_two_days = 6
-      travel_to DateTime.new(2017, 12, 15) do
-        assert_equal nbr_since_two_days, @pr.retrieve.under_review.old(2).count
+      prs_since_six_days = 8
+      travel_to DateTime.new(2017, 12, 18) do
+        assert_equal prs_since_six_days, @pr.retrieve.under_review.old(2).count
       end
     end
 
     VCR.use_cassette "github_projects" do
-      nbr_since_five_days = 1
+      prs_since_five_days = 1
       travel_to DateTime.new(2017, 12, 15) do
-        assert_equal nbr_since_five_days, @pr.retrieve.under_review.old(5).count
+        assert_equal prs_since_five_days, @pr.retrieve.under_review.old(5).count
       end
     end
   end
 
   def test_old_returns_pull_request_instance
     assert_instance_of Rick::PullRequest, @pr.old
+  end
+
+  # PullRequest#total_off_days
+  def test_total_off_days_returns_total_off_days
+    from = DateTime.new(2017, 12, 15)
+    to = DateTime.new(2017, 12, 18)
+    assert_equal @pr.total_off_days(from, to), 2
   end
 end

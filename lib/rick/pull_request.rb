@@ -27,14 +27,25 @@ module Rick
     end
 
     def old(since = MAX_OLD)
+      to = Date.today
       @data.delete_if do |pr|
-        true if (Date.today - Date.parse(pr["updated_at"])).to_i < since
+        from = Date.parse(pr["updated_at"])
+        true if ((to - from).to_i - total_off_days(from, to)) < since
       end
       self
     end
 
     def count
       @data.size
+    end
+
+    # Pas vraiment le rôle de cette classe...
+    def total_off_days(from, to)
+      total_off_days = 0
+      (from..to).map(&:wday).each do |day|
+        total_off_days += 1 if [0, 1].include?(day)
+      end
+      total_off_days
     end
 
     private
