@@ -6,5 +6,11 @@ require "rick/rick_brain"
 require "rick/rick_bot"
 
 module Rick
-  # Your code goes here...
+  @config = YAML::load_file ".rick.yml"
+
+  class << self
+    def config
+      @config
+    end
+  end
 end

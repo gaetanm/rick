@@ -50,10 +50,19 @@ module Rick
 
     private
 
+    def retrieve_project
+      projects = @gh.repos.projects.list owner: Rick.config["repository"]["owner"], repo: Rick.config["repository"]["name"]
+      projects.detect { |p| p.name == Rick.config["project"]["name"] }
+    end
+
+    def retrieve_column(project)
+      columns = @gh.projects.columns.list(project["id"])
+      columns.detect { |c| c.name == Rick.config["project"]["column"]["name"] }
+    end
+
     def retrieve_cards_from_project
-      project_id = (@gh.repos.projects.list owner: "Keycoopt", repo: "Keybab").first["id"]
-      column_id = @gh.projects.columns.list(project_id)[1]["id"] # "En relecture"
-      @gh.projects.cards.list(column_id)
+      column = retrieve_column(retrieve_project)
+      @gh.projects.cards.list(column["id"])
     end
 
     def extract_prs_numbers(cards)
