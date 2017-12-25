@@ -1,6 +1,6 @@
 # Rick
 
-A Slack bot about GitHub stuff for Keycoopt.
+A Slack bot about GitHub and Pivotal Tracker stuff for Keycoopt.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```
-env SLACK_API_TOKEN=foo GITHUB_SECRET_TOKEN=bar bundle exec bin/rick
+env SLACK_API_TOKEN=foo GITHUB_SECRET_TOKEN=bar PIVOTAL_SECRET_TOKEN=baz bundle exec bin/rick
 ```
 
 ## Development
