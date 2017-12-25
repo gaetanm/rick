@@ -7,10 +7,10 @@ module Rick
     def summarize
       pr = PullRequest.new(@gh)
       prs = pr.retrieve
-      all_prs = prs.data.dup
+      prs_under_review = prs.under_review.data.dup
       old_prs = prs.under_review.old.data
       msg = "Wubba Lubba dub-dub!\n"
-      msg += "PRs en cours de relecture : #{all_prs.count}\n"
+      msg += "PRs en cours de relecture : #{prs_under_review.count}\n"
       msg += "PRs abandonnée(s) depuis au moins 2 jours : #{old_prs.count}\n"
       old_prs.each do |pr|
         msg += "\t"
