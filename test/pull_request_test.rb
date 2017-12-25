@@ -23,7 +23,7 @@ class PullRequestTest < ActiveSupport::TestCase
     end
   end
 
-  # PullRequest#opened
+  # PullRequest#under_review
   def test_under_review_sets_data_with_pull_requests_under_review
     VCR.use_cassette "github_projects" do
       prs_under_review = 8
@@ -39,7 +39,7 @@ class PullRequestTest < ActiveSupport::TestCase
 
   # PullRequest#old
   def test_old_sets_data_with_pull_requests_with_no_activity_since_the_given_number_of_day
-    VCR.use_cassette "github_projects" do
+    VCR.use_cassette "github_projects", record: :new_episodes do
       prs_since_two_days = 6
       travel_to DateTime.new(2017, 12, 25) do
         assert_equal prs_since_two_days, @pr.retrieve.under_review.old.count

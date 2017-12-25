@@ -5,6 +5,7 @@ require "rick/version"
 require "rick/pull_request"
 require "rick/rick_brain"
 require "rick/rick_bot"
+require "rick/story"
 require "singleton"
 
 module Rick
@@ -12,8 +13,8 @@ module Rick
 
   class << self
     def config
-      @config["github"]["token"]  = ENV["GITHUB_SECRET_TOKEN"]
-      @config["pivotal"]["token"] = ENV["PIVOTAL_SECRET_TOKEN"]
+      @config["github"]["token"]  = ENV["GITHUB_SECRET_TOKEN"]  || raise("Missing ENV['GITHUB_SECRET_TOKEN'].")
+      @config["pivotal"]["token"] = ENV["PIVOTAL_SECRET_TOKEN"] || raise("Missing ENV['PIVOTAL_SECRET_TOKEN'].")
       @config
     end
   end

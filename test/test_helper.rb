@@ -10,4 +10,10 @@ Minitest::Reporters.use!
 VCR.configure do |config|
   config.cassette_library_dir = "test/fixtures/vcr_cassettes"
   config.hook_into :webmock
+  # Uncomment this line below just once when new cassette need to be generated.
+  # config.filter_sensitive_data("<PIVOTAL_SECRET_TOKEN>") { ENV['PIVOTAL_SECRET_TOKEN'] }
 end
+
+# To allow tests to run without setting env data (where there are cassettes).
+ENV["GITHUB_SECRET_TOKEN"] ||= "TEST"
+ENV["PIVOTAL_SECRET_TOKEN"] ||= "TEST"
