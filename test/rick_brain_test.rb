@@ -14,7 +14,7 @@ class RickBrainTest < ActiveSupport::TestCase
       # msg += "\tFeature/login via username 149953974 -> https://github.com/Keycoopt/Keybab/pull/1152\n"
 
       travel_to DateTime.new(2017, 12, 15) do
-        assert_equal Rick::RickBrain.new("gaetanm", ENV["GITHUB_SECRET_TOKEN"]).summarize, msg
+        assert_equal Rick::RickBrain.instance.summarize, msg
       end
     end
   end

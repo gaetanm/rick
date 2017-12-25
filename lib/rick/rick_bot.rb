@@ -1,7 +1,7 @@
 module Rick
   class RickBot < SlackRubyBot::Bot
     command "hey" do |client, data, match|
-      rick = RickBrain.new("gaetanm", ENV["GITHUB_SECRET_TOKEN"])
+      rick = RickBrain.instance
       client.say(text: rick.summarize, channel: data.channel)
     end
 

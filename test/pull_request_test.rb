@@ -3,7 +3,9 @@ require "test_helper"
 class PullRequestTest < ActiveSupport::TestCase
 
   def setup
-    @pr = Rick::PullRequest.new(Github.new(basic_auth: "gaetanm:#{ENV['GITHUB_SECRET_TOKEN']}"))
+    config = Rick.config
+    gh = Github.new(basic_auth: "#{config["github"]["username"]}:#{config["github"]["token"]}")
+    @pr = Rick::PullRequest.new(gh, config["github"])
   end
 
   # PullRequest#retrieve

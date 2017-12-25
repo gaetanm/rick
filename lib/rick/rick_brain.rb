@@ -1,12 +1,15 @@
 module Rick
   class RickBrain
-    def initialize(login, password)
-      @gh = Github.new basic_auth: "#{login}:#{password}"
+    include Singleton
+
+    def initialize
+      @config = Rick.config
+      @gh = Github.new(basic_auth: "#{@config["github"]["username"]}:#{@config["github"]["token"]}")
+      @pull_request = PullRequest.new(@gh, @config["github"])
     end
 
     def summarize
-      pr = PullRequest.new(@gh)
-      prs = pr.retrieve
+      prs = @pull_request.retrieve
       prs_under_review = prs.under_review.data.dup
       old_prs = prs.under_review.old.data
       msg = "Wubba Lubba dub-dub!\n"

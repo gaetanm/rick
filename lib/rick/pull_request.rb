@@ -4,14 +4,15 @@ module Rick
 
     attr_reader :data
 
-    def initialize(gh)
+    def initialize(gh, config)
       @gh = gh
       @data = []
+      @config = config
     end
 
     def retrieve
       @data = []
-      @gh.pull_requests.list("Keycoopt", "Keybab").each do |pr|
+      @gh.pull_requests.list(@config["repository"]["owner"], @config["repository"]["name"]).each do |pr|
         @data << pr
       end
       self
@@ -51,13 +52,13 @@ module Rick
     private
 
     def retrieve_project
-      projects = @gh.repos.projects.list owner: Rick.config["repository"]["owner"], repo: Rick.config["repository"]["name"]
-      projects.detect { |p| p.name == Rick.config["project"]["name"] }
+      projects = @gh.repos.projects.list owner: @config["repository"]["owner"], repo: @config["repository"]["name"]
+      projects.detect { |p| p.name == @config["project"]["name"] }
     end
 
     def retrieve_column(project)
       columns = @gh.projects.columns.list(project["id"])
-      columns.detect { |c| c.name == Rick.config["project"]["column"]["name"] }
+      columns.detect { |c| c.name == @config["project"]["column"]["name"] }
     end
 
     def retrieve_cards_from_project

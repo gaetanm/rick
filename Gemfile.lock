@@ -5,6 +5,7 @@ PATH
       faye-websocket
       github_api
       slack-ruby-bot
+      tracker_api
 
 GEM
   remote: https://rubygems.org/
@@ -18,11 +19,21 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     awesome_print (1.8.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.3)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.5)
+    declarative (0.0.10)
+    declarative-option (0.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    equalizer (0.0.11)
     eventmachine (1.2.5)
+    excon (0.60.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
@@ -37,10 +48,12 @@ GEM
       hashie (~> 3.5, >= 3.5.2)
       oauth2 (~> 1.0)
     gli (2.17.1)
-    hashie (3.5.6)
+    hashie (3.5.7)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     jwt (1.5.6)
+    mimemagic (0.3.2)
     minitest (5.10.3)
     minitest-reporters (1.1.19)
       ansi
@@ -59,6 +72,10 @@ GEM
     public_suffix (3.0.1)
     rack (2.0.3)
     rake (10.5.0)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     ruby-progressbar (1.9.0)
     slack-ruby-bot (0.10.5)
       hashie
@@ -71,9 +88,25 @@ GEM
       hashie
       websocket-driver
     thread_safe (0.3.6)
+    tracker_api (1.8.0)
+      addressable
+      equalizer
+      excon
+      faraday
+      faraday_middleware
+      mimemagic
+      multi_json
+      representable
+      virtus
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     vcr (4.0.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)

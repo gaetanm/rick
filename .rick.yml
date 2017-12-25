@@ -1,8 +1,15 @@
-repository:
-  owner: Keycoopt
-  name: Keybab
+github:
+  username: gaetanm
+  repository:
+    owner: Keycoopt
+    name: Keybab
+  project:
+    name: Développement Keybab
+    column:
+      name: En relecture
+pivotal:
+  project:
+    id: 2121054
+  story:
+    state: unstarted
 
-project:
-  name: Développement Keybab
-  column:
-      name: "En relecture"
