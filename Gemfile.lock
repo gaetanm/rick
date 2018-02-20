@@ -6,11 +6,12 @@ PATH
       github_api
       slack-ruby-bot
       tracker_api
+      webmock
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.1.4)
+    activesupport (5.1.5)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -27,6 +28,8 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     declarative (0.0.10)
     declarative-option (0.1.0)
     descendants_tracker (0.0.4)
@@ -48,8 +51,9 @@ GEM
       hashie (~> 3.5, >= 3.5.2)
       oauth2 (~> 1.0)
     gli (2.17.1)
+    hashdiff (0.3.7)
     hashie (3.5.7)
-    i18n (0.9.1)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jwt (1.5.6)
@@ -60,7 +64,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     oauth2 (1.4.0)
@@ -69,18 +73,19 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    public_suffix (3.0.1)
-    rack (2.0.3)
+    public_suffix (3.0.2)
+    rack (2.0.4)
     rake (10.5.0)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     ruby-progressbar (1.9.0)
+    safe_yaml (1.0.4)
     slack-ruby-bot (0.10.5)
       hashie
       slack-ruby-client (>= 0.6.0)
-    slack-ruby-client (0.11.0)
+    slack-ruby-client (0.11.1)
       activesupport
       faraday (>= 0.9)
       faraday_middleware
@@ -98,7 +103,7 @@ GEM
       multi_json
       representable
       virtus
-    tzinfo (1.2.4)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
     vcr (4.0.0)
@@ -107,6 +112,10 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    webmock (3.3.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -124,4 +133,4 @@ DEPENDENCIES
   vcr
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

@@ -21,9 +21,7 @@ module Rick
     def under_review
       cards = retrieve_cards_from_project
       prs_numbers = extract_prs_numbers(cards)
-      @data.delete_if do |pr|
-        true unless prs_numbers.include?(pr["number"].to_s)
-      end
+      @data.delete_if {|pr| !prs_numbers.include?(pr["number"].to_s)}
       self
     end
 
@@ -33,6 +31,11 @@ module Rick
         from = Date.parse(pr["updated_at"])
         true if ((to - from).to_i - total_off_days(from, to)) < since
       end
+      self
+    end
+
+    def without_changelog_update
+      @data.delete_if { |pr| has_updated_changelog?(pr["body"]) }
       self
     end
 
@@ -50,6 +53,10 @@ module Rick
     end
 
     private
+
+    def has_updated_changelog?(body)
+      body.include?("[x] Le CHANGELOG est à jour")
+    end
 
     def retrieve_project
       projects = @gh.repos.projects.list owner: @config["repository"]["owner"], repo: @config["repository"]["name"]

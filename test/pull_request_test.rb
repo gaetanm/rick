@@ -26,7 +26,7 @@ class PullRequestTest < ActiveSupport::TestCase
   # PullRequest#under_review
   def test_under_review_sets_data_with_pull_requests_under_review
     VCR.use_cassette "github_projects" do
-      prs_under_review = 8
+      prs_under_review = 5
       assert_equal prs_under_review, @pr.retrieve.under_review.count
     end
   end
@@ -40,14 +40,14 @@ class PullRequestTest < ActiveSupport::TestCase
   # PullRequest#old
   def test_old_sets_data_with_pull_requests_with_no_activity_since_the_given_number_of_day
     VCR.use_cassette "github_projects", record: :new_episodes do
-      prs_since_two_days = 6
+      prs_since_two_days = 0
       travel_to DateTime.new(2017, 12, 25) do
         assert_equal prs_since_two_days, @pr.retrieve.under_review.old.count
       end
     end
 
     VCR.use_cassette "github_projects" do
-      prs_since_five_days = 5
+      prs_since_five_days = 0
       travel_to DateTime.new(2017, 12, 25) do
         assert_equal prs_since_five_days, @pr.retrieve.under_review.old(3).count
       end
@@ -63,5 +63,13 @@ class PullRequestTest < ActiveSupport::TestCase
     from = DateTime.new(2017, 12, 15)
     to = DateTime.new(2017, 12, 18)
     assert_equal @pr.total_off_days(from, to), 2
+  end
+
+  # PullRequest#without_changelog_update
+  def test_without_changelog_update_returns_pull_requests_without_changelog_update
+    prs_without_changelog_update = 14
+    VCR.use_cassette "github_pulls" do
+      assert_equal prs_without_changelog_update, @pr.retrieve.without_changelog_update.count
+    end
   end
 end

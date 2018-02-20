@@ -26,7 +26,7 @@ class StoryTest < ActiveSupport::TestCase
   # Story#with_state
   def test_with_state_sets_data_with_stories_having_the_given_state
     VCR.use_cassette "pivotal_stories" do
-      stories_unstarted = 3
+      stories_unstarted = 26
       assert_equal stories_unstarted, @story.retrieve.with_state("unstarted").count
     end
   end
