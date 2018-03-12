@@ -22,26 +22,23 @@ module Rick
       prs_without_changelog_update_under_review = prs.under_review.without_changelog_update.data.dup
       old_prs = prs.under_review.old.data
       msg = "Wubba Lubba dub-dub!\n"
-      msg += "PR(s) en cours de relecture : #{prs_under_review.count}\n"
-      msg += "PR(s) abandonnée(s) depuis au moins 2 jours : #{old_prs.count}\n"
+      msg += "*PR(s) en cours de relecture* : #{prs_under_review.count}\n"
+      msg += "*PR(s) abandonnée(s) depuis au moins 2 jours* : #{old_prs.count}\n"
       old_prs.each do |pr|
-        msg += "\t"
-        msg += "#{pr["title"]} -> #{pr["html_url"]}\n"
+        msg += "> _#{pr["title"]}_ *>* #{pr["html_url"]}\n"
       end
-      msg += "PR(s) avec oubli de màj du CHANGELOG : #{prs_without_changelog_update_under_review.count}\n"
+      msg += "*PR(s) avec oubli de màj du CHANGELOG* : #{prs_without_changelog_update_under_review.count}\n"
       prs_without_changelog_update_under_review.each do |pr|
-        msg += "\t"
-        msg += "#{pr["title"]} -> #{pr["html_url"]}\n"
+        msg += "> _#{pr["title"]}_ *>* #{pr["html_url"]}\n"
       end
       msg
     end
 
     def summarize_pivotal
       stories = @story.retrieve.with_state("delivered").data
-      msg = "Histoire(s) en attente de recette: #{stories.count}\n"
+      msg = "*Histoire(s) en attente de recette* : #{stories.count}\n"
       stories.each do |s|
-        msg += "\t"
-        msg += "#{s.name} -> #{s.url}\n"
+        msg += "> _#{s.name}_ *>* #{s.url}\n"
       end
       msg
     end
